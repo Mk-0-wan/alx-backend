@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env python3
 """Simple pagging function"""
 
 from typing import Tuple
