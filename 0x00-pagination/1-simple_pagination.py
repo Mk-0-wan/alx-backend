@@ -34,7 +34,7 @@ class Server:
                 dataset = [row for row in reader]
             self.__dataset = dataset[1:]
 
-        print(type(self.__dataset))
+        # print(type(self.__dataset))
 
         return self.__dataset
 
