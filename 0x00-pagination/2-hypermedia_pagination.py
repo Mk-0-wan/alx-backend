@@ -49,8 +49,8 @@ class Server:
             return []
         return data[start_idx: end_idx]
 
-
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Mapping[str, Union[int, List[Any]]]:
+    def get_hyper(self, page: int = 1, page_size: int = 10)
+    -> Mapping[str, Union[int, List[Any]]]:
         """getting a dictionary to provide more infomration"""
         dct = {}
         dct.update({"page_size": page_size})
@@ -63,5 +63,5 @@ class Server:
             dct.update({"next_page": None})
         dct.update({"prev_page": page - 1})
         dct.update({"next_page": page + 1})
-        dct.update({"total_pages": total_pages })
+        dct.update({"total_pages": total_pages})
         return dct
