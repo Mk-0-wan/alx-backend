@@ -39,5 +39,8 @@ class Server:
             page_size *= page
             page -= 1
             return data[page: page_size]
-
+        if (page_size * (page - 1)) > len(data):
+            return []
+        elif (page_size * page) > len(data):
+            return []
         return data[(page_size * (page - 1)): (page_size * page)]
