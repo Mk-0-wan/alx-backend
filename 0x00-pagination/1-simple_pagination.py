@@ -3,8 +3,18 @@
 """Getting data from the pagination provided"""
 
 import csv
-import math
-from typing import List
+# import math
+from typing import List, Tuple
+
+
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """Function that returns the index range from the starting idx to
+    the ending idx"""
+    if ((page - 1) == 0):
+        page_size *= page
+        return ((page - 1), page_size)
+
+    return (page_size * (page - 1), page_size * page)
 
 
 class Server:
@@ -35,12 +45,6 @@ class Server:
         assert page == page > 0
         assert page_size == page_size > 0
         data = self.dataset()
-        if ((page - 1) == 0):
-            page_size *= page
-            page -= 1
-            return data[page: page_size]
-        if (page_size * (page - 1)) > len(data):
-            return []
-        elif (page_size * page) > len(data):
-            return []
-        return data[(page_size * (page - 1)): (page_size * page)]
+
+        start_idx, end_idx = index_range(page, page_size)
+        return data[start_idx: end_idx]
