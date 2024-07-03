@@ -26,7 +26,7 @@ def index_page():
 
 
 @babel.localeselector
-def get_local():
+def get_locale():
     """Gets the best match to match the supported
     language"""
     return request.accept_languages.best_match(
