@@ -22,9 +22,7 @@ def index_page() -> Any:
     """retrives the index page
      of the flask app
     """
-    return render_template(
-            "3-index.html",
-            title=gettext('Welcome to Holberton'))
+    return render_template("3-index.html")
 
 
 @babel.localeselector
