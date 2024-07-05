@@ -2,6 +2,7 @@
 """Making a simple flask app with babel"""
 from flask import Flask, render_template, request
 from flask_babel import Babel, gettext
+from typing import Any
 
 
 class Config:
@@ -17,7 +18,7 @@ babel = Babel(app)
 
 
 @app.route('/')
-def index_page():
+def index_page() -> Any:
     """retrives the index page
      of the flask app
     """
@@ -27,7 +28,7 @@ def index_page():
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> Any:
     """Gets the best match to match the supported
     language"""
     return request.accept_languages.best_match(
