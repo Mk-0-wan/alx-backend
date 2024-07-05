@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Making a simple flask app with babel"""
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext
+from flask_babel import Babel
 from typing import Any
 
 
 class Config:
     """Simple flask config params"""
     LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = "fr"
+    BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
