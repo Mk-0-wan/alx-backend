@@ -15,6 +15,7 @@ class Config:
 app = Flask(__name__)
 babel = Babel(app)
 app.config.from_object(Config)
+app.url_map.strict_slashes = False
 
 
 @babel.localeselector
@@ -26,7 +27,7 @@ def get_locale() -> Any:
             )
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/')
 def index_page() -> Any:
     """retrives the index page
      of the flask app
