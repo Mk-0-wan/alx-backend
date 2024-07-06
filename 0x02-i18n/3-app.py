@@ -2,11 +2,10 @@
 """Making a simple flask app with babel"""
 from flask import Flask, render_template, request
 from flask_babel import Babel
-from typing import Any
 
 
 class Config:
-    """Simple flask config params"""
+    """ global configuration """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -19,17 +18,14 @@ app.url_map.strict_slashes = False
 
 
 @babel.localeselector
-def get_locale() -> Any:
-    """Gets the best match to match the supported
-    language"""
+def get_locale() -> str:
+    """ getting locale """
     return request.accept_languages.best_match(
             app.config['LANGUAGES']
             )
 
 
 @app.route('/')
-def index_page() -> Any:
-    """retrives the index page
-     of the flask app
-    """
-    return render_template("3-index.html")
+def helloWorld() -> str:
+    """ Home page for the Flask app """
+    return render_template('3-index.html')
