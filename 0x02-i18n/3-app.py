@@ -32,5 +32,3 @@ def index_page() -> Any:
      of the flask app
     """
     return render_template("3-index.html")
-
-
