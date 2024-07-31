@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ _('welcome_page') }}</title>
+</head>
+
+<body>
+  <h1>{{ _('greetings_page') }}</h1>
+  {% if g.user %}
+  {{ _('logging_succseful', username=g.user.name) }}
+  {% else %}
+  {{ _('loggin_failed') }}
+  {% endif %}
+</body>
+
+</html>
