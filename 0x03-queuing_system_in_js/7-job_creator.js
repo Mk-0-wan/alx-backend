@@ -54,6 +54,21 @@ const jobs = [
   }
 ];
 
+// on completion
+queue.on('job complete', (id) => {
+  console.log(`Notification job #${id} completed`);
+});
+
+// once a program fails
+queue.on('job failed', (id, errorMessage) => {
+  console.log(`Notification job #${id} failed: ${errorMessage}`);
+});
+
+// keeping track of a job process
+queue.on('job progress', (id, progress) => {
+  console.log(`Notification job #${id} ${progress}% complete`);
+});
+
 jobs.forEach((job) => {
   const newJob = queue.create('push_notification_code_2', job);
   newJob.save((err) => {
@@ -61,14 +76,10 @@ jobs.forEach((job) => {
     else console.log('Encounterd an error', err);
   });
 
-  // on completion
-  newJob.on('completed', () => console.log(`Notification job ${newJob.id} completed`));
-
-  // once a program fails
-  newJob.on('failed', (err) => console.log(`Notification job ${newJob.id} failed: ${err}`));
-
-  // keeping track of a job process
-  newJob.on('progress', (progress) => console.log(`Notification job ${newJob.id} ${progress}% complete`));
+  // Not recommended at the Job level handled all at the queue.level
+  // newJob.on('completed', () => console.log(`Notification job ${newJob.id} completed`));
+  // newJob.on('failed', (err) => console.log(`Notification job ${newJob.id} failed: ${err}`));
+  // newJob.on('progress', (progress) => console.log(`Notification job ${newJob.id} ${progress}% complete`));
 })
 
 
