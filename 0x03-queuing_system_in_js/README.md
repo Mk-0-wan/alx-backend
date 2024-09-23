@@ -27,7 +27,7 @@
 - One way is to turn all the callback functions into promise functions using `promisify`
 - Another way is to use the newest version of redis which cames with aysnc/await functions out of the box.
 - Here are some examples:
-    ```
+    ```javascript
         // with legacy callback-function
         ...
 
@@ -44,7 +44,8 @@
     ```
     - the above code works well but has some constrains, I cannot handle the result outside the callback function due to scope issues.
 
-    ``` 
+
+    ```javascript
         // a cleaner way is to use promisify to all the callback functions
         // making it easier for use to use async/await functionalities to our advantage
         ...
