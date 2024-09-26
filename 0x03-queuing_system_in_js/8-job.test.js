@@ -25,6 +25,21 @@ describe('createPushNotificationsJobs', () => {
     done();
   });
 
+  it('should display an error when jobs are integers', (done) => {
+    expect(() => createPushNotificationsJobs(2, queue)).throws('Job is not an array');
+    done();
+  });
+
+  it('should display an error when there are no jobs present in the array', (done) => {
+    expect(() => createPushNotificationsJobs([], queue)).throws('Job is not an array');
+    done();
+  });
+
+  it('should display an error when the array elements are none objects, or contain Null value', (done) => {
+    expect(() => createPushNotificationsJobs(['hello', 'world', 33, 55])).throws('Job is not an object');
+    done();
+  })
+
   it('should display an error message when jobs is not an array', (done) => {
     expect(() => createPushNotificationsJobs('noJobs', queue)).throws('Job is not an array');
     done();
