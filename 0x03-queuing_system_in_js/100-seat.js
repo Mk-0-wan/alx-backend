@@ -24,14 +24,17 @@ client.connect;
 client.on('ready', () => console.log('Client connection to redis was succeful'));
 client.on('error', () => console.log('Client connection to redis failed'));
 
+// asynchronously set the number default number of seats
 (async () => {
   await setAsync('available_seats', availableSeats);
 })();
 
+// handle setting new requests
 async function reserveSeat(number) {
   await setAsync('available_seats', number);
 }
 
+// handles getting cached available seats
 async function getCurrentAvailableSeats() {
   try {
     const data = await getAsync('available_seats');
@@ -42,7 +45,6 @@ async function getCurrentAvailableSeats() {
   }
 }
 
-// get the number of availble seats {"numberOfAvailableSeats": "50"}
 app.get('/available_seats', async (req, res) => {
   try {
     const seats = await getCurrentAvailableSeats();
@@ -52,12 +54,12 @@ app.get('/available_seats', async (req, res) => {
   }
 })
 
-// reserve_seat route if reservationEnabled is false block the request {"status": "Reservation are blocked"}
 app.get('/reserve_seat', (req, res) => {
   if (!reservationEnabled) {
     res.json({'status': 'Reservation are blocked'});
   }
 
+  // each req make a new job(reservation of one seat)
   const job = queue.create('reserve_seat').save((err) => {
     if (!err) {
       res.json({'status': 'Reservation in process'});
@@ -75,6 +77,7 @@ app.get('/process', async (req, res) => {
 
   res.json({'status': 'Queue processing'});
 
+  // process each req(reservation of seats)
   queue.process('reserve_seat', async (_, done) => {
     try {
       const currentAvailableSeats = await getCurrentAvailableSeats(); 
