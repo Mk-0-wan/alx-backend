@@ -32,7 +32,9 @@ queue.on('job progress', (id, progress) => {
 
 function createPushNotificationsJobs(jobs, queue) {
   if (Array.isArray(jobs)) {
+    if (jobs.length === 0) throw new Error('Job is not an array');
     jobs.forEach((job) => {
+      if (Object.prototype.toString.call(job) !== '[object Object]') throw new Error('Job is not an object');
       const newJob = queue.create('push_notification_code_3', job);
       newJob.save((err) => {
         if (!err) console.log(`Notification job created: ${newJob.id}`);
